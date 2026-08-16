@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssistantRouteImport } from './routes/assistant'
+import { Route as CooperationRouteImport } from './routes/cooperation'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DiagnoseRouteImport } from './routes/diagnose'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CooperationRoute = CooperationRouteImport.update({
+  id: '/cooperation',
+  path: '/cooperation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnoseRoute = DiagnoseRouteImport.update({
+  id: '/diagnose',
+  path: '/diagnose',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
+  '/cooperation': typeof CooperationRoute
+  '/dashboard': typeof DashboardRoute
+  '/diagnose': typeof DiagnoseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
+  '/cooperation': typeof CooperationRoute
+  '/dashboard': typeof DashboardRoute
+  '/diagnose': typeof DiagnoseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
+  '/cooperation': typeof CooperationRoute
+  '/dashboard': typeof DashboardRoute
+  '/diagnose': typeof DiagnoseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/assistant' | '/cooperation' | '/dashboard' | '/diagnose'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/assistant' | '/cooperation' | '/dashboard' | '/diagnose'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistant'
+    | '/cooperation'
+    | '/dashboard'
+    | '/diagnose'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
+  CooperationRoute: typeof CooperationRoute
+  DashboardRoute: typeof DashboardRoute
+  DiagnoseRoute: typeof DiagnoseRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +94,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cooperation': {
+      id: '/cooperation'
+      path: '/cooperation'
+      fullPath: '/cooperation'
+      preLoaderRoute: typeof CooperationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnose': {
+      id: '/diagnose'
+      path: '/diagnose'
+      fullPath: '/diagnose'
+      preLoaderRoute: typeof DiagnoseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
+  CooperationRoute: CooperationRoute,
+  DashboardRoute: DashboardRoute,
+  DiagnoseRoute: DiagnoseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
